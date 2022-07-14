@@ -6,7 +6,6 @@ class ClassCounter extends Component {
   };
 
   increase = () => {
-    // return (this.state.result += 1);
     this.setState({ result: this.state.result + 1 });
   };
   decrease = () => {
@@ -15,9 +14,7 @@ class ClassCounter extends Component {
   reset = () => {
     this.setState({ result: 0 });
   };
-  // getResult = () => {
-  //   return this.state.result;
-  // };
+
   render() {
     return (
       <div className='counter'>
