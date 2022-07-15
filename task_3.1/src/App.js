@@ -1,7 +1,8 @@
 import logo from './logo.svg';
-import './App.css';
+import './styles/App.css';
 import ClassCounter from './components/ClassCounter';
 import FuncCounter from './components/FuncCounter';
+import FuncCounterRedux from './components/FuncCounterRedux';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <div className='counters'>
           <ClassCounter />
           <FuncCounter />
+          <FuncCounterRedux />
         </div>
       </header>
     </div>
