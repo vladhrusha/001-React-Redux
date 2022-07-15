@@ -3,13 +3,13 @@ import { React, useState } from 'react';
 function FuncCounter() {
   const [result, setResult] = useState(0);
 
-  const increase = () => {
+  const onIncrease = () => {
     setResult(result + 1);
   };
-  const decrease = () => {
+  const onDecrease = () => {
     setResult(result - 1);
   };
-  const reset = () => {
+  const onReset = () => {
     setResult(0);
   };
 
@@ -17,13 +17,13 @@ function FuncCounter() {
     <div className='counter'>
       <h2>Func</h2>
       <h3 className='result'>{result}</h3>
-      <h5 className='controlButton increaseButton' onClick={increase}>
+      <h5 className='controlButton increaseButton' onClick={onIncrease}>
         +
       </h5>
-      <h5 className='controlButton decreaseButton' onClick={decrease}>
+      <h5 className='controlButton decreaseButton' onClick={onDecrease}>
         -
       </h5>
-      <h4 className='controlButton resetButton' onClick={reset}>
+      <h4 className='controlButton resetButton' onClick={onReset}>
         Reset
       </h4>
     </div>

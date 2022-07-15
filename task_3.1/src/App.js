@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import ClassCounter from './components/classCounter';
-import FuncCounter from './components/funcCounter';
+import ClassCounter from './components/ClassCounter';
+import FuncCounter from './components/FuncCounter';
 
 function App() {
   return (
