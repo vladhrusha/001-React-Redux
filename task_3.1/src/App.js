@@ -3,7 +3,7 @@ import './styles/App.css';
 import ClassCounter from './components/ClassCounter';
 import FuncCounter from './components/FuncCounter';
 import { useDispatch } from 'react-redux';
-import ReactReduxCounter from './components/ReduxReactCounter';
+import { ReactReduxCounter } from './components/ReduxReactCounter';
 import { decrement, increment, reset } from './slices/counterSlice';
 
 import { useEffect } from 'react';
@@ -13,7 +13,6 @@ function App() {
 
   useEffect(() => {
     const buttons = document.querySelectorAll('.counter__button');
-    console.log(ReactReduxCounter);
     buttons.forEach((button) => {
       button.addEventListener('click', changeCounterValue);
     });

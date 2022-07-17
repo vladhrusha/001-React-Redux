@@ -1,7 +1,7 @@
 import { React } from 'react';
 
-function CounterButton(props) {
-  return <button className='counter__button'>{props.text}</button>;
-}
+const CounterButton = ({ text }) => {
+  return <button className='counter__button'>{text}</button>;
+};
 
 export default CounterButton;

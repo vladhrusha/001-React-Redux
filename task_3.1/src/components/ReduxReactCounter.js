@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import CounterButton from './CounterButton';
 
-function ReactReduxCounter() {
+export const ReactReduxCounter = () => {
   const count = useSelector((state) => state.counter.value);
 
   return (
@@ -15,6 +15,4 @@ function ReactReduxCounter() {
       <CounterButton text='Reset' />
     </div>
   );
-}
-
-export default ReactReduxCounter;
+};
