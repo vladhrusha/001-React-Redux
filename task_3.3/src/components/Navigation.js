@@ -6,7 +6,7 @@ import PostsList from './PostsList';
 import TodoList from './TodoList';
 import UserList from './UserList';
 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const Navigation = () => {
   return (
@@ -26,12 +26,20 @@ const Navigation = () => {
         </Link>
       </nav>
 
-      <Routes>
-        <Route path='/PostsList' element={<PostsList />}></Route>
-        <Route path='/TodoList' element={<TodoList />}></Route>
-        <Route path='/UserList' element={<UserList />}></Route>
-        <Route path='/' element={<Home />}></Route>
-      </Routes>
+      <Switch>
+        <Route path='/PostsList'>
+          <PostsList />
+        </Route>
+        <Route path='/TodoList'>
+          <TodoList />
+        </Route>
+        <Route path='/UserList'>
+          <UserList />
+        </Route>
+        <Route path='/'>
+          <Home />
+        </Route>
+      </Switch>
     </Router>
   );
 };
