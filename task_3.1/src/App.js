@@ -7,6 +7,7 @@ import { ReactReduxCounter } from './components/ReduxReactCounter';
 import { decrement, increment, reset } from './slices/counterSlice';
 
 import { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,9 +39,9 @@ function App() {
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
         <div className='counters'>
-          <ClassCounter />
+          {/* <ClassCounter />
           <FuncCounter />
-          <ReactReduxCounter />
+          <ReactReduxCounter /> */}
         </div>
       </header>
     </div>
