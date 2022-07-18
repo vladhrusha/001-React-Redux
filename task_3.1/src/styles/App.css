@@ -28,9 +28,22 @@
 }
 
 .counters {
-  width: 50vw;
+  width: 80vw;
+  height: 60vh;
   display: flex;
   justify-content: space-around;
+}
+
+.counter {
+  display: flex;
+  flex-direction: column;
+}
+
+.counter__button {
+  background-color: transparent;
+  border: 0;
+  color: white;
+  font-size: 40px;
 }
 
 @keyframes App-logo-spin {
@@ -40,6 +53,16 @@
   to {
     transform: rotate(360deg);
   }
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 /*# sourceMappingURL=App.css.map */

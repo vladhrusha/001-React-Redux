@@ -1,17 +1,17 @@
-import { React, Component, useState } from 'react';
+import { React, Component } from 'react';
 
 class ClassCounter extends Component {
   state = {
     result: 0,
   };
 
-  increase = () => {
+  onIncrease = () => {
     this.setState({ result: this.state.result + 1 });
   };
-  decrease = () => {
+  onDecrease = () => {
     this.setState({ result: this.state.result - 1 });
   };
-  reset = () => {
+  onReset = () => {
     this.setState({ result: 0 });
   };
 
@@ -20,13 +20,13 @@ class ClassCounter extends Component {
       <div className='counter'>
         <h2>Class</h2>
         <h3 className='result'>{this.state.result}</h3>
-        <h5 className='controlButton increaseButton' onClick={this.increase}>
+        <h5 className='controlButton increaseButton' onClick={this.onIncrease}>
           +
         </h5>
-        <h5 className='controlButton decreaseButton' onClick={this.decrease}>
+        <h5 className='controlButton decreaseButton' onClick={this.onDecrease}>
           -
         </h5>
-        <h4 className='controlButton resetButton' onClick={this.reset}>
+        <h4 className='controlButton resetButton' onClick={this.onReset}>
           Reset
         </h4>
       </div>
