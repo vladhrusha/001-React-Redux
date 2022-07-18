@@ -1,4 +1,4 @@
-// import '../styles/Main.scss';
+import '../../../styles/Main.scss';
 import React from 'react';
 
 const PostsList = () => {

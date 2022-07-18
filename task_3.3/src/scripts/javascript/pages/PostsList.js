@@ -1,4 +1,4 @@
-// import '../styles/Main.scss';
+import '../../../styles/Main.scss';
 import React from 'react';
 var PostsList = function () {
     return (React.createElement("div", { className: 'main' },
