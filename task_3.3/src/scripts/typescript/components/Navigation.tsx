@@ -1,10 +1,10 @@
 import '../styles/Navigation.scss';
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 
-import Home from '../JSX/components/Home';
-import PostsList from './PostsList';
-import TodoList from './TodoList';
-import UserList from './UserList';
+import Home from '../pages/Home';
+import PostsList from '../pages/PostsList';
+import TodoList from '../pages/TodoList';
+import UserList from '../pages/UserList';
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 

@@ -1,13 +1,7 @@
-import logo from '../logo.svg';
 import '../styles/Main.scss';
-
-const Home = () => {
-  return (
-    <div className='main'>
-      {/* <header className='App-header'> */}
-      <img src={logo} className='App-logo' alt='logo' />
-      {/* </header> */}
-    </div>
-  );
+var Home = function () {
+    return (<div className='main'>
+    </div>);
 };
 export default Home;
+{ /* <img src={logo} className='App-logo' alt='logo' /> */ }
