@@ -15,7 +15,10 @@
 .table {
     border-collapse: collapse;
 }
-.tr { 
+.thead {
+    color: #61dafb;
+}
+.tr {
     border-bottom: solid white 2px;
 }
 .td {

@@ -1,49 +1,60 @@
-import './Main.scss';
-import {useState, useEffect} from 'react';
-import { fetchData } from '../../scripts/fetchData';
+import './Main.scss'
+import {useState, useEffect} from 'react'
+import { fetchData } from '../../scripts/fetchData'
 import DOMpurify from 'dompurify'
 
 
 const TodoList = () => {
-  const [todoItems, setTodoItems] = useState([{
-      userId: 1,
-      id: 1,
-      title: "",
-      completed: false
-    }]);
-  
+  const [todos, setTodos] = useState<ITodos>()
   const getData = async () => {
-    setTodoItems(await fetchData('todos'));
+    setTodos(await fetchData('todos'))
   }
   useEffect(() => {
-    getData();
-  }, []);
+    getData()
+  }, [])
 
-  let todosHTML : string;
+
+
+  let cleanTodosHTML = `<div class='main'></div>`
+  if (todos) {
+    cleanTodosHTML = DOMpurify.sanitize(createTodosHTMLString(todos))
+  }
+  return (<div dangerouslySetInnerHTML={{__html: cleanTodosHTML}} />)
+}
+
+const createTodosHTMLString = (todos : ITodos) => {
+  let todosHTML : string
   todosHTML = `<div class='main'>
-              <table class="table">
-              <thead>
-              <tr class="tr">
-              <td class="td">Task</td>
-              <td class="td completed">Completed</td>
-              </tr>
-              </thead>
-              <tbody>`;
-  if (todoItems) {
-    todoItems.forEach((todoItem)  => {
+    <table class="table">
+    <thead class="thead">
+    <tr class="tr">
+    <td class="td">Task</td>
+    <td class="td completed">Completed</td>
+    </tr>
+    </thead>
+    <tbody>
+  `
+  if (todos) {
+    todos.forEach((todo)  => {
       todosHTML += `
         <tr class="tr">
-        <td class="td">${todoItem.title}</td>
-        <td class=td">${todoItem.completed}</td>
+        <td class="td">${todo.title}</td>
+        <td class=td">${todo.completed}</td>
         </tr>
-      `;
-     });
+      `
+    })
   }
   todosHTML += `</tbody></table></div>`
+  return todosHTML
 
-  return (<div dangerouslySetInnerHTML={{__html: DOMpurify.sanitize(todosHTML)}} />)
-  
-};
+}
 
+interface ITodo {
+  userId: number,
+  id: number,
+  title: string,
+  completed: boolean
+}
+interface ITodos extends Array<ITodo>{}
 
-export default TodoList;
+export default TodoList

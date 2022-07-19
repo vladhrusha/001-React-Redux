@@ -1,11 +1,10 @@
-import './Navigation.scss';
+import './Navigation.scss'
+import Home from '../pages/Home'
+import PostsList from '../pages/PostsList'
+import TodoList from '../pages/TodoList'
+import UserList from '../pages/UserList'
 
-import Home from '../pages/Home';
-import PostsList from '../pages/PostsList';
-import TodoList from '../pages/TodoList';
-import UserList from '../pages/UserList';
-
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
 const Navigation = () => {
   return (
@@ -32,7 +31,7 @@ const Navigation = () => {
         <Route path='/' element={<Home />}></Route>
       </Routes>
     </Router>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation
