@@ -1,5 +1,5 @@
 import logo from '../logo.svg';
-import '../styles/Main.scss';
+import './Main.scss';
 
 const Home = () => {
   return (
