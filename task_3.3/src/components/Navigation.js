@@ -1,10 +1,10 @@
-import '../../../styles/Navigation.scss';
+import '../styles/Navigation.scss';
+import logo from '../logo.svg';
 
-import React from 'react';
-import Home from '../pages/Home';
-import PostsList from '../pages/PostsList';
-import TodoList from '../pages/TodoList';
-import UserList from '../pages/UserList';
+import Home from './Home';
+import PostsList from './PostsList';
+import TodoList from './TodoList';
+import UserList from './UserList';
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
@@ -27,10 +27,18 @@ const Navigation = () => {
       </nav>
 
       <Switch>
-        <Route path='/PostsList'><PostsList /></Route>
-        <Route path='/TodoList'><TodoList /></Route>
-        <Route path='/UserList'><UserList /></Route>
-        <Route path='/'><Home /></Route>
+        <Route path='/PostsList'>
+          <PostsList />
+        </Route>
+        <Route path='/TodoList'>
+          <TodoList />
+        </Route>
+        <Route path='/UserList'>
+          <UserList />
+        </Route>
+        <Route path='/'>
+          <Home />
+        </Route>
       </Switch>
     </Router>
   );
