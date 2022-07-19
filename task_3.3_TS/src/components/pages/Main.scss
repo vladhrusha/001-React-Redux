@@ -1,13 +1,29 @@
 .main {
     background-color: #282c34;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
+    min-height: 90vh;
+    height: 90%;
+    display:  flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
     color: white;
     text-align: left;
+    padding: 10px 20px;
+    font-size: 12px;
+
+}
+
+.table {
+    border-collapse: collapse;
+}
+.tr { 
+    border-bottom: solid white 2px;
+}
+.td {
+    padding: 10px 10px;
+}
+.td.completed{
+    position: relative;
+    right: 10px;
 }
 
 .logo--central {
