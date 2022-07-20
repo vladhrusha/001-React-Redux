@@ -9,21 +9,6 @@ import {useState, useEffect} from 'react'
 
 const PostsList: React.FC<IPosts> = (posts : IPosts) => {
 
-
-  const [dummy, setDummy] = useState<IPosts>()
-
-  useEffect(() => {
-    getData()
-  }, [])
-
-  const getData = async () => {
-    setDummy(await fetchData('posts'))
-  }
-  if (dummy){
-    console.log(typeof dummy === typeof posts)
-    console.log(dummy == posts)
-  }
-
   let cleanPostsHTML = `<div class='main'></div>`
 
   cleanPostsHTML = DOMpurify.sanitize(createPostsHTMLString(posts))
@@ -43,14 +28,25 @@ const createPostsHTMLString = (posts : IPosts) => {
     </thead>
     <tbody>
   `
-  for (let i=0; i < posts[99].id; i++) {
-    postsHTML += `
+  Object.entries(posts).forEach(post => {
+      postsHTML += `
       <tr class="tr">
-      <td class="td">${posts[i].title}</td>
-      <td class="td">${posts[i].body}</td>
+      <td class="td">${post[1].title}</td>
+      <td class="td">${post[1].body}</td>
       </tr>
     `
-  }
+  });
+
+  //   for (let i=0; i < posts[99].id; i++) {
+  //   postsHTML += `
+  //     <tr class="tr">
+  //     <td class="td">${posts[i].title}</td>
+  //     <td class="td">${posts[i].body}</td>
+  //     </tr>
+  //   `
+  // }
+
+
   postsHTML += `</tbody></table></div>`
   return postsHTML
 

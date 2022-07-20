@@ -25,14 +25,24 @@ const createTodosHTMLString = (todos : ITodos) => {
     </thead>
     <tbody>
   `
-  for (let i=0; i < todos[199].id; i++) {
+  Object.entries(todos).forEach(todo => {
       todosHTML += `
-        <tr class="tr">
-        <td class="td">${todos[i].title}</td>
-        <td class=td">${todos[i].completed}</td>
-        </tr>
-      `
-    }
+      <tr class="tr">
+      <td class="td">${todo[1].title}</td>
+      <td class="td">${todo[1].completed}</td>
+      </tr>
+    `
+  });
+
+  // for (let i=0; i < todos[199].id; i++) {
+  //     todosHTML += `
+  //       <tr class="tr">
+  //       <td class="td">${todos[i].title}</td>
+  //       <td class=td">${todos[i].completed}</td>
+  //       </tr>
+  //     `
+  //   }
+    
   todosHTML += `</tbody></table></div>`
   return todosHTML
 

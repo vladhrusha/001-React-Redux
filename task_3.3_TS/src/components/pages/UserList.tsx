@@ -25,14 +25,25 @@ const createUsersHTMLString = (users : IUsers) => {
     </thead>
     <tbody>
   `
-  for (let i=0; i < users[9].id; i++) {
+
+  Object.entries(users).forEach(user => {
       usersHTML += `
-        <tr class="tr">
-        <td class="td">${users[i].name}</td>
-        <td class="td">${users[i].username}</td>
-        </tr>
-      `
-  }
+      <tr class="tr">
+      <td class="td">${user[1].name}</td>
+      <td class="td">${user[1].username}</td>
+      </tr>
+    `
+  });
+
+  // for (let i=0; i < users[9].id; i++) {
+  //     usersHTML += `
+  //       <tr class="tr">
+  //       <td class="td">${users[i].name}</td>
+  //       <td class="td">${users[i].username}</td>
+  //       </tr>
+  //     `
+  // }
+
   usersHTML += `</tbody></table></div>`
   return usersHTML
 
