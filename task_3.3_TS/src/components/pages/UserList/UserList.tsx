@@ -19,7 +19,6 @@ const UserList = () => {
     rows = composeRows(users)
   }
   return (
-    <div className='main'>
       <table className="table">
           <thead className="thead">
             <tr className="tr">
@@ -31,9 +30,7 @@ const UserList = () => {
             {rows}
           </tbody>
       </table>
-    </div>
   )
-
 }
 
 

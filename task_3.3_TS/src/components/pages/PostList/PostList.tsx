@@ -20,7 +20,6 @@ const PostList = () => {
     rows = composeRows(posts)
   }
   return (
-    <div className='main'>
       <table className="table">
           <thead className="thead">
             <tr className="tr">
@@ -32,7 +31,6 @@ const PostList = () => {
             {rows}
           </tbody>
       </table>
-    </div>
   )
 }
 

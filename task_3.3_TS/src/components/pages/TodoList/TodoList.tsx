@@ -19,7 +19,6 @@ const TodoList = () => {
     rows = composeRows(todos)
   }
   return (
-    <div className='main'>
       <table className="table">
           <thead className="thead">
             <tr className="tr">
@@ -31,7 +30,6 @@ const TodoList = () => {
             {rows}
           </tbody>
       </table>
-    </div>
   )
 }
 

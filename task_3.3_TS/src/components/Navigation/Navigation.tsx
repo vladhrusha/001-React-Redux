@@ -24,12 +24,15 @@ const Navigation = () => {
         </Link>
       </nav>
 
+      <div className="main">
       <Routes>
         <Route path='/PostList' element={<PostList />}></Route>
         <Route path='/TodoList' element={<TodoList />}></Route>
         <Route path='/UserList' element={<UserList />}></Route>
         <Route path='/' element={<Home />}></Route>
       </Routes>
+      </div>
+
     </Router>
   )
 }
