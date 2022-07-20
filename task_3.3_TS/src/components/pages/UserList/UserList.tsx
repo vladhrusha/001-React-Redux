@@ -7,23 +7,18 @@ import {User} from '../../../models/user'
 const UserList = () => {
   const [users, setUsers] = useState<User[]>([])
   useEffect(() => {
+    const getData = async () => {
+      setUsers(await fetchData('users'))
+    }
     getData()
   }, [])
 
-  const getData = async () => {
-    setUsers(await fetchData('users'))
-  }
+
 
   if (users.length === 0){
   return <>Loading...</>
   }
 
-  let rows :JSX.Element[] = users.map((user) =>(
-    <tr key={user.id}className="tr">
-      <td className="td">{user.name}</td>
-      <td className="td">{user.username}</td>
-    </tr>
-  ))
 
   return (
     <table className="table">
@@ -34,7 +29,13 @@ const UserList = () => {
         </tr>
       </thead>
       <tbody>
-        {rows}
+        {
+        users.map((user) =>(
+          <tr key={user.id}className="tr">
+            <td className="td">{user.name}</td>
+            <td className="td">{user.username}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )

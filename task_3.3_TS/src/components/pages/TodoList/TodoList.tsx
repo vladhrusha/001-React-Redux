@@ -7,23 +7,18 @@ import {Todo} from '../../../models/todo'
 const TodoList = () => {
   const [todos, setTodos] = useState<Todo[]>([])
   useEffect(() => {
+    const getData = async () => {
+      setTodos(await fetchData('todos'))
+    }
     getData()
   }, [])
 
-  const getData = async () => {
-    setTodos(await fetchData('todos'))
-  }
+
 
   if (todos.length === 0){
     return <>Loading...</>
   }
 
-  let rows :JSX.Element[] = todos.map((todo) =>(
-    <tr key={todo.id}className="tr">
-      <td className="td">{todo.title}</td>
-      <td className="td">{todo.completed}</td>
-    </tr>
-  ))
 
   return (
     <table className="table">
@@ -34,7 +29,13 @@ const TodoList = () => {
         </tr>
       </thead>
       <tbody>
-        {rows}
+        {
+        todos.map((todo) =>(
+          <tr key={todo.id}className="tr">
+            <td className="td">{todo.title}</td>
+            <td className="td">{todo.completed}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )

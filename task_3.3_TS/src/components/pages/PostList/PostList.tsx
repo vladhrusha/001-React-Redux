@@ -7,22 +7,17 @@ import {Post} from '../../../models/post'
 const PostList = () => {
   const [posts, setPosts] = useState<Post[]>([])
   useEffect(() => {
+    const getData = async () => {
+      setPosts(await fetchData('posts'))
+    }
     getData()
   }, [])
 
-  const getData = async () => {
-    setPosts(await fetchData('posts'))
-  }
+
 
   if (posts.length === 0){
   return <>Loading...</>
   }
-  let rows :JSX.Element[] = posts.map((post) =>(
-    <tr key={post.id}className="tr">
-      <td className="td">{post.title}</td>
-      <td className="td">{post.body}</td>
-    </tr>
-  ))
 
   return (
     <table className="table">
@@ -33,7 +28,13 @@ const PostList = () => {
         </tr>
       </thead>
       <tbody>
-        {rows}
+        {
+        posts.map((post) =>(
+          <tr key={post.id}className="tr">
+            <td className="td">{post.title}</td>
+            <td className="td">{post.body}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )
