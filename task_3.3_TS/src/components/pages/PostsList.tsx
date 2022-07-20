@@ -1,10 +1,10 @@
 import './Main.scss'
 import DOMpurify from 'dompurify'
 
-import {IPosts} from '../../interfaces/JSONPlaceholderTypes'
+import {IPosts, IPostsProps} from '../../interfaces/JSONPlaceholderTypes'
 
 
-const PostsList: React.FC<IPosts> = (posts : IPosts) => {
+const PostsList: React.FC<IPostsProps> = ({posts} : IPostsProps) => {
 
   let cleanPostsHTML = `<div class='main'></div>`
 
@@ -25,14 +25,24 @@ const createPostsHTMLString = (posts : IPosts) => {
     </thead>
     <tbody>
   `
-  Object.entries(posts).forEach(post => {
+
+  posts.forEach(post => {
       postsHTML += `
       <tr class="tr">
-      <td class="td">${post[1].title}</td>
-      <td class="td">${post[1].body}</td>
+      <td class="td">${post.title}</td>
+      <td class="td">${post.body}</td>
       </tr>
     `
   });
+
+  // Object.entries(posts).forEach(post => {
+  //     postsHTML += `
+  //     <tr class="tr">
+  //     <td class="td">${post[1].title}</td>
+  //     <td class="td">${post[1].body}</td>
+  //     </tr>
+  //   `
+  // });
 
   //   for (let i=0; i < posts[99].id; i++) {
   //   postsHTML += `

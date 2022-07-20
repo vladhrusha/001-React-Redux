@@ -1,11 +1,11 @@
 import './Main.scss'
 import DOMpurify from 'dompurify'
 
-import {ITodos} from '../../interfaces/JSONPlaceholderTypes'
+import {ITodos, ITodosProps} from '../../interfaces/JSONPlaceholderTypes'
 
 
 
-const TodoList: React.FC<ITodos> = (todos : ITodos) => {
+const TodoList: React.FC<ITodosProps> = ({todos} : ITodosProps) => {
   let cleanTodosHTML = `<div class='main'></div>`
 
   cleanTodosHTML = DOMpurify.sanitize(createTodosHTMLString(todos))
@@ -25,24 +25,15 @@ const createTodosHTMLString = (todos : ITodos) => {
     </thead>
     <tbody>
   `
-  Object.entries(todos).forEach(todo => {
+  todos.forEach(todo => {
       todosHTML += `
       <tr class="tr">
-      <td class="td">${todo[1].title}</td>
-      <td class="td">${todo[1].completed}</td>
+      <td class="td">${todo.title}</td>
+      <td class="td">${todo.completed}</td>
       </tr>
     `
   });
 
-  // for (let i=0; i < todos[199].id; i++) {
-  //     todosHTML += `
-  //       <tr class="tr">
-  //       <td class="td">${todos[i].title}</td>
-  //       <td class=td">${todos[i].completed}</td>
-  //       </tr>
-  //     `
-  //   }
-    
   todosHTML += `</tbody></table></div>`
   return todosHTML
 

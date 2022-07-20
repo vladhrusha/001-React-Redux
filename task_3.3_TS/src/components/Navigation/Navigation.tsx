@@ -4,7 +4,7 @@ import PostsList from '../pages/PostsList'
 import TodoList from '../pages/TodoList'
 import UserList from '../pages/UserList'
 
-import {IUsers, ITodos, IPosts} from '../../interfaces/JSONPlaceholderTypes'
+import {IUsers, ITodos, IPosts, IPostsProps, IUsersProps, ITodosProps} from '../../interfaces/JSONPlaceholderTypes'
 import { fetchData } from '../../scripts/fetchData'
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
@@ -15,6 +15,10 @@ const Navigation = () => {
   const [users, setUsers] = useState<IUsers>()
   const [todos, setTodos] = useState<ITodos>()
   const [posts, setPosts] = useState<IPosts>()
+  const postsProps : IPostsProps = {} as IPostsProps
+  const usersProps : IUsersProps = {} as IUsersProps
+  const todosProps : ITodosProps = {} as ITodosProps
+
 
   useEffect(() => {
     getData()
@@ -25,7 +29,11 @@ const Navigation = () => {
     setTodos(await fetchData('todos'))
     setPosts(await fetchData('posts'))
   }
+
   if (users && todos && posts){
+        postsProps.posts = posts
+        usersProps.users = users
+        todosProps.todos = todos
       return (
     <Router>
       <nav className='nav'>
@@ -44,9 +52,9 @@ const Navigation = () => {
       </nav>
 
       <Routes>
-        <Route path='/PostsList' element={<PostsList  {...posts}/>}></Route>
-        <Route path='/TodoList' element={<TodoList {...todos}/>}></Route>
-        <Route path='/UserList' element={<UserList {...users}/>}></Route>
+        <Route path='/PostsList' element={<PostsList  {...postsProps}/>}></Route>
+        <Route path='/TodoList' element={<TodoList {...todosProps}/>}></Route>
+        <Route path='/UserList' element={<UserList {...usersProps}/>}></Route>
         <Route path='/' element={<Home />}></Route>
       </Routes>
     </Router>

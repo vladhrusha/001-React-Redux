@@ -1,10 +1,10 @@
 import './Main.scss'
 import DOMpurify from 'dompurify'
 
-import {IUsers} from '../../interfaces/JSONPlaceholderTypes'
+import {IUsers, IUsersProps} from '../../interfaces/JSONPlaceholderTypes'
 
 
-const UserList: React.FC<IUsers> = (users : IUsers) => {
+const UserList: React.FC<IUsersProps> = ({users} : IUsersProps) => {
   let cleanUsersHTML = `<div class='main'></div>`
 
   cleanUsersHTML = DOMpurify.sanitize(createUsersHTMLString(users))
@@ -26,23 +26,14 @@ const createUsersHTMLString = (users : IUsers) => {
     <tbody>
   `
 
-  Object.entries(users).forEach(user => {
+  users.forEach(user => {
       usersHTML += `
       <tr class="tr">
-      <td class="td">${user[1].name}</td>
-      <td class="td">${user[1].username}</td>
+      <td class="td">${user.name}</td>
+      <td class="td">${user.username}</td>
       </tr>
     `
   });
-
-  // for (let i=0; i < users[9].id; i++) {
-  //     usersHTML += `
-  //       <tr class="tr">
-  //       <td class="td">${users[i].name}</td>
-  //       <td class="td">${users[i].username}</td>
-  //       </tr>
-  //     `
-  // }
 
   usersHTML += `</tbody></table></div>`
   return usersHTML

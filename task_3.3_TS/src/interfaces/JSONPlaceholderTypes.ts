@@ -28,3 +28,14 @@ export interface IProps {
   posts: IPosts
 }
 
+export interface IPostsProps {
+  posts: IPosts
+}
+export interface IUsersProps {
+  users: IUsers
+}
+export interface ITodosProps {
+  todos: ITodos
+}
+
+
