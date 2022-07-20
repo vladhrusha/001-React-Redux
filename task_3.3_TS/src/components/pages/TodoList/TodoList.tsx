@@ -15,10 +15,9 @@ const TodoList = () => {
   }
 
   let rows :JSX.Element[] = []
-  if (todos){
+  if (todos && todos.length > 0){
     rows = composeRows(todos)
-  }
-  return (
+      return (
       <table className="table">
           <thead className="thead">
             <tr className="tr">
@@ -31,6 +30,9 @@ const TodoList = () => {
           </tbody>
       </table>
   )
+  }
+  return <></>
+
 }
 
 const composeRows = (todos : Todo[]) => {

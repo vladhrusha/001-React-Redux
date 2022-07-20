@@ -15,10 +15,9 @@ const UserList = () => {
   }
 
   let rows :JSX.Element[] = []
-  if (users){
+  if (users && users.length > 0){
     rows = composeRows(users)
-  }
-  return (
+    return (
       <table className="table">
           <thead className="thead">
             <tr className="tr">
@@ -31,6 +30,9 @@ const UserList = () => {
           </tbody>
       </table>
   )
+  }
+  return <></>
+
 }
 
 

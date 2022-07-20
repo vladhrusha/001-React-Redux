@@ -16,10 +16,9 @@ const PostList = () => {
 
 
   let rows :JSX.Element[] = []
-  if (posts){
+  if (posts && posts.length > 0){
     rows = composeRows(posts)
-  }
-  return (
+      return (
       <table className="table">
           <thead className="thead">
             <tr className="tr">
@@ -32,6 +31,9 @@ const PostList = () => {
           </tbody>
       </table>
   )
+  }
+  return (<></>)
+
 }
 
 const composeRows = (posts : Post[]) => {
