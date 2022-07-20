@@ -1,6 +1,4 @@
 import './Main.scss'
-import {useState, useEffect} from 'react'
-import { fetchData } from '../../scripts/fetchData'
 import DOMpurify from 'dompurify'
 
 import {IUsers} from '../../interfaces/JSONPlaceholderTypes'
