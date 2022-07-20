@@ -7,21 +7,11 @@ import {ITodos} from '../../interfaces/JSONPlaceholderTypes'
 
 
 
-const TodoList: React.FC<ITodos> = (props: ITodos) => {
-  const [todos, setTodos] = useState<ITodos>()
-  const getData = async () => {
-    setTodos(await fetchData('todos'))
-  }
-  useEffect(() => {
-    getData()
-  }, [])
-
-
-
+const TodoList: React.FC<ITodos> = (todos : ITodos) => {
   let cleanTodosHTML = `<div class='main'></div>`
-  if (todos) {
-    cleanTodosHTML = DOMpurify.sanitize(createTodosHTMLString(todos))
-  }
+
+  cleanTodosHTML = DOMpurify.sanitize(createTodosHTMLString(todos))
+
   return (<div dangerouslySetInnerHTML={{__html: cleanTodosHTML}} />)
 }
 
@@ -37,16 +27,14 @@ const createTodosHTMLString = (todos : ITodos) => {
     </thead>
     <tbody>
   `
-  if (todos) {
-    todos.forEach((todo)  => {
+  for (let i=0; i < todos[199].id; i++) {
       todosHTML += `
         <tr class="tr">
-        <td class="td">${todo.title}</td>
-        <td class=td">${todo.completed}</td>
+        <td class="td">${todos[i].title}</td>
+        <td class=td">${todos[i].completed}</td>
         </tr>
       `
-    })
-  }
+    }
   todosHTML += `</tbody></table></div>`
   return todosHTML
 

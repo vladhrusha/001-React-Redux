@@ -6,18 +6,11 @@ import DOMpurify from 'dompurify'
 import {IPosts} from '../../interfaces/JSONPlaceholderTypes'
 
 
-const PostsList = (props : IPosts) => {
-  const [posts, setPosts] = useState<IPosts>()
-  const getData = async () => {
-    setPosts(await fetchData('posts'))
-  }
-  useEffect(() => {
-    getData()
-  }, [])
+const PostsList: React.FC<IPosts> = (posts : IPosts) => {
   let cleanPostsHTML = `<div class='main'></div>`
-  if (posts) {
-    cleanPostsHTML = DOMpurify.sanitize(createPostsHTMLString(posts))
-  }
+
+  cleanPostsHTML = DOMpurify.sanitize(createPostsHTMLString(posts))
+
   return (<div dangerouslySetInnerHTML={{__html: cleanPostsHTML}} />)
 }
 
@@ -33,15 +26,13 @@ const createPostsHTMLString = (posts : IPosts) => {
     </thead>
     <tbody>
   `
-  if (posts) {
-    posts.forEach((post)  => {
-      postsHTML += `
-        <tr class="tr">
-        <td class="td">${post.title}</td>
-        <td class="td">${post.body}</td>
-        </tr>
-      `
-    })
+  for (let i=0; i < posts[99].id; i++) {
+    postsHTML += `
+      <tr class="tr">
+      <td class="td">${posts[i].title}</td>
+      <td class="td">${posts[i].body}</td>
+      </tr>
+    `
   }
   postsHTML += `</tbody></table></div>`
   return postsHTML

@@ -6,20 +6,11 @@ import DOMpurify from 'dompurify'
 import {IUsers} from '../../interfaces/JSONPlaceholderTypes'
 
 
-const UserList: React.FC<IUsers> = (props: IUsers) => {
-
-  const [users, setUsers] = useState<IUsers>()
-  const getData = async () => {
-    setUsers(await fetchData('users'))
-  }
-  useEffect(() => {
-    getData()
-  }, [])
-
+const UserList: React.FC<IUsers> = (users : IUsers) => {
   let cleanUsersHTML = `<div class='main'></div>`
-  if (users) {
-    cleanUsersHTML = DOMpurify.sanitize(createUsersHTMLString(users))
-  }
+
+  cleanUsersHTML = DOMpurify.sanitize(createUsersHTMLString(users))
+
   return (<div dangerouslySetInnerHTML={{__html: cleanUsersHTML}} />)
 }
 
@@ -36,15 +27,13 @@ const createUsersHTMLString = (users : IUsers) => {
     </thead>
     <tbody>
   `
-  if (users) {
-    users.forEach((user)  => {
+  for (let i=0; i < users[9].id; i++) {
       usersHTML += `
         <tr class="tr">
-        <td class="td">${user.name}</td>
-        <td class="td">${user.username}</td>
+        <td class="td">${users[i].name}</td>
+        <td class="td">${users[i].username}</td>
         </tr>
       `
-  })
   }
   usersHTML += `</tbody></table></div>`
   return usersHTML
