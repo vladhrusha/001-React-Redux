@@ -31,7 +31,7 @@ const TodoList = () => {
       </table>
   )
   }
-  return <></>
+  return <>Loading...</>
 
 }
 

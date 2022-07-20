@@ -32,7 +32,7 @@ const PostList = () => {
       </table>
   )
   }
-  return (<></>)
+  return <>Loading...</>
 
 }
 
