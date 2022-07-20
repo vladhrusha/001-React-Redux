@@ -1,19 +1,31 @@
 import './Main.scss'
 import DOMpurify from 'dompurify'
 
-import {ITodos, ITodosProps} from '../../interfaces/JSONPlaceholderTypes'
+import {useState, useEffect} from 'react'
+import { fetchData } from '../../scripts/fetchData'
+import {Todo} from './todo'
 
 
+const TodoList = () => {
+  const [todos, setTodos] = useState<Todo[]>([])
+  useEffect(() => {
+    getData()
+  }, [])
 
-const TodoList: React.FC<ITodosProps> = ({todos} : ITodosProps) => {
-  let cleanTodosHTML = `<div class='main'></div>`
+  const getData = async () => {
+    setTodos(await fetchData('todos'))
+  }
 
-  cleanTodosHTML = DOMpurify.sanitize(createTodosHTMLString(todos))
+  let cleanPostsHTML = `<div class='main'></div>`
 
-  return (<div dangerouslySetInnerHTML={{__html: cleanTodosHTML}} />)
+  if (todos){
+    cleanPostsHTML = DOMpurify.sanitize(createTodosHTMLString(todos))
+  }
+
+  return (<div dangerouslySetInnerHTML={{__html: cleanPostsHTML}} />)
 }
 
-const createTodosHTMLString = (todos : ITodos) => {
+const createTodosHTMLString = (todos : Todo[]) => {
   let todosHTML : string
   todosHTML = `<div class='main'>
     <table class="table">
@@ -40,4 +52,4 @@ const createTodosHTMLString = (todos : ITodos) => {
 }
 
 
-export default TodoList
+export { TodoList } 

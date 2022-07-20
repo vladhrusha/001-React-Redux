@@ -1,19 +1,30 @@
 import './Main.scss'
 import DOMpurify from 'dompurify'
+import {useState, useEffect} from 'react'
+import { fetchData } from '../../scripts/fetchData'
+import {Post} from './post'
 
-import {IPosts, IPostsProps} from '../../interfaces/JSONPlaceholderTypes'
 
+const PostsList = () => {
+  const [posts, setPosts] = useState<Post[]>([])
+  useEffect(() => {
+    getData()
+  }, [])
 
-const PostsList: React.FC<IPostsProps> = ({posts} : IPostsProps) => {
+  const getData = async () => {
+    setPosts(await fetchData('posts'))
+  }
 
   let cleanPostsHTML = `<div class='main'></div>`
 
-  cleanPostsHTML = DOMpurify.sanitize(createPostsHTMLString(posts))
+  if (posts){
+    cleanPostsHTML = DOMpurify.sanitize(createPostsHTMLString(posts))
+  }
 
   return (<div dangerouslySetInnerHTML={{__html: cleanPostsHTML}} />)
 }
 
-const createPostsHTMLString = (posts : IPosts) => {
+const createPostsHTMLString = (posts : Post[]) => {
   let postsHTML : string
   postsHTML = `<div class='main'>
     <table class="table">
@@ -35,28 +46,9 @@ const createPostsHTMLString = (posts : IPosts) => {
     `
   });
 
-  // Object.entries(posts).forEach(post => {
-  //     postsHTML += `
-  //     <tr class="tr">
-  //     <td class="td">${post[1].title}</td>
-  //     <td class="td">${post[1].body}</td>
-  //     </tr>
-  //   `
-  // });
-
-  //   for (let i=0; i < posts[99].id; i++) {
-  //   postsHTML += `
-  //     <tr class="tr">
-  //     <td class="td">${posts[i].title}</td>
-  //     <td class="td">${posts[i].body}</td>
-  //     </tr>
-  //   `
-  // }
-
-
   postsHTML += `</tbody></table></div>`
   return postsHTML
 
 }
 
-export default PostsList
+export { PostsList }

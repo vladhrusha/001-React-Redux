@@ -1,8 +1,7 @@
 import './App.scss'
-import Navigation from './components/Navigation/Navigation'
+import { Navigation } from './components/Navigation'
 
 function App() {
-
   return (
     <div className='app'>
       <Navigation />

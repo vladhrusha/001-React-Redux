@@ -1,18 +1,30 @@
 import './Main.scss'
 import DOMpurify from 'dompurify'
 
-import {IUsers, IUsersProps} from '../../interfaces/JSONPlaceholderTypes'
+import {useState, useEffect} from 'react'
+import { fetchData } from '../../scripts/fetchData'
+import {User} from './user'
 
+const UserList = () => {
+  const [users, setUsers] = useState<User[]>([])
+  useEffect(() => {
+    getData()
+  }, [])
 
-const UserList: React.FC<IUsersProps> = ({users} : IUsersProps) => {
+  const getData = async () => {
+    setUsers(await fetchData('users'))
+  }
+
   let cleanUsersHTML = `<div class='main'></div>`
 
-  cleanUsersHTML = DOMpurify.sanitize(createUsersHTMLString(users))
+  if (users){
+    cleanUsersHTML = DOMpurify.sanitize(createUsersHTMLString(users))
+  }
 
   return (<div dangerouslySetInnerHTML={{__html: cleanUsersHTML}} />)
 }
 
-const createUsersHTMLString = (users : IUsers) => {
+const createUsersHTMLString = (users : User[]) => {
   let usersHTML : string
   usersHTML = `
     <div class='main'>
@@ -41,4 +53,4 @@ const createUsersHTMLString = (users : IUsers) => {
 }
 
 
-export default UserList
+export { UserList }
