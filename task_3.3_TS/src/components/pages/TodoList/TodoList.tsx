@@ -33,14 +33,11 @@ const TodoList = () => {
       </table>
     </div>
   )
-
-
 }
 
 const composeRows = (todos : Todo[]) => {
     let rows :JSX.Element[] = []
     todos.forEach((todo) => {
-      console.log(todo.completed)
       rows.push(
         <tr key={todo.id}className="tr">
           <td className="td">{todo.title}</td>
