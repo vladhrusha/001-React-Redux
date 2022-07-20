@@ -3,8 +3,11 @@ import {useState, useEffect} from 'react'
 import { fetchData } from '../../scripts/fetchData'
 import DOMpurify from 'dompurify'
 
+import {IUsers} from '../../interfaces/JSONPlaceholderTypes'
 
-const UserList = () => {
+
+const UserList: React.FC<IUsers> = (props: IUsers) => {
+
   const [users, setUsers] = useState<IUsers>()
   const getData = async () => {
     setUsers(await fetchData('users'))
@@ -48,12 +51,5 @@ const createUsersHTMLString = (users : IUsers) => {
 
 }
 
-interface IUser {
-  userId: number,
-  id: number,
-  name: string,
-  username: string
-}
-interface IUsers extends Array<IUser>{}
 
 export default UserList

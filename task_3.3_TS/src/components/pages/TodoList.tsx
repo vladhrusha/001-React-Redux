@@ -3,8 +3,11 @@ import {useState, useEffect} from 'react'
 import { fetchData } from '../../scripts/fetchData'
 import DOMpurify from 'dompurify'
 
+import {ITodos} from '../../interfaces/JSONPlaceholderTypes'
 
-const TodoList = () => {
+
+
+const TodoList: React.FC<ITodos> = (props: ITodos) => {
   const [todos, setTodos] = useState<ITodos>()
   const getData = async () => {
     setTodos(await fetchData('todos'))
@@ -49,12 +52,5 @@ const createTodosHTMLString = (todos : ITodos) => {
 
 }
 
-interface ITodo {
-  userId: number,
-  id: number,
-  title: string,
-  completed: boolean
-}
-interface ITodos extends Array<ITodo>{}
 
 export default TodoList

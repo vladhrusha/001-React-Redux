@@ -3,7 +3,10 @@ import {useEffect, useState} from 'react'
 import {fetchData} from '../../scripts/fetchData'
 import DOMpurify from 'dompurify'
 
-const PostsList = () => {
+import {IPosts} from '../../interfaces/JSONPlaceholderTypes'
+
+
+const PostsList = (props : IPosts) => {
   const [posts, setPosts] = useState<IPosts>()
   const getData = async () => {
     setPosts(await fetchData('posts'))
@@ -11,7 +14,6 @@ const PostsList = () => {
   useEffect(() => {
     getData()
   }, [])
-
   let cleanPostsHTML = `<div class='main'></div>`
   if (posts) {
     cleanPostsHTML = DOMpurify.sanitize(createPostsHTMLString(posts))
@@ -45,13 +47,5 @@ const createPostsHTMLString = (posts : IPosts) => {
   return postsHTML
 
 }
-
-interface IPost {
-  userId: number,
-  id: number,
-  title: string,
-  body: string
-}
-interface IPosts extends Array<IPost>{}
 
 export default PostsList
