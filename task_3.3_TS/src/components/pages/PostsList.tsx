@@ -2,9 +2,6 @@ import './Main.scss'
 import DOMpurify from 'dompurify'
 
 import {IPosts} from '../../interfaces/JSONPlaceholderTypes'
-import { fetchData } from '../../scripts/fetchData'
-import {useState, useEffect} from 'react'
-
 
 
 const PostsList: React.FC<IPosts> = (posts : IPosts) => {
