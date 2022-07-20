@@ -1,4 +1,4 @@
-import '../Main.scss'
+import './Home.scss'
 import logo from '../../../logo.svg'
 
 

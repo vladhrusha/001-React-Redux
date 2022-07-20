@@ -1,0 +1,20 @@
+.table {
+    border-collapse: collapse;
+}
+
+.thead {
+    color: #61dafb;
+}
+
+.tr {
+    border-bottom: solid white 2px;
+}
+
+.td {
+    padding: 10px 10px;
+}
+
+.td.completed {
+    position: relative;
+    right: 10px;
+}

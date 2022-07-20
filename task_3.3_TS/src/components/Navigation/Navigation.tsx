@@ -1,6 +1,6 @@
 import './Navigation.scss'
 import {Home} from '../pages/Home'
-import {PostsList} from '../pages/PostsList'
+import {PostList} from '../pages/PostList'
 import {TodoList} from '../pages/TodoList'
 import {UserList} from '../pages/UserList'
 
@@ -13,7 +13,7 @@ const Navigation = () => {
         <Link className='nav__link' to='/'>
           Home
         </Link>
-        <Link className='nav__link' to='/PostsList'>
+        <Link className='nav__link' to='/PostList'>
           Posts
         </Link>
         <Link className='nav__link' to='/TodoList'>
@@ -25,7 +25,7 @@ const Navigation = () => {
       </nav>
 
       <Routes>
-        <Route path='/PostsList' element={<PostsList />}></Route>
+        <Route path='/PostList' element={<PostList />}></Route>
         <Route path='/TodoList' element={<TodoList />}></Route>
         <Route path='/UserList' element={<UserList />}></Route>
         <Route path='/' element={<Home />}></Route>

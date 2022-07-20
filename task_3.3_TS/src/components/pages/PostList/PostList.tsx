@@ -1,30 +1,31 @@
-import './UserList.scss'
-
+import './PostList.scss'
 import {useState, useEffect} from 'react'
 import { fetchData } from '../../../scripts/fetchData'
-import {User} from '../../../models/user'
+import {Post} from '../../../models/post'
 
-const UserList = () => {
-  const [users, setUsers] = useState<User[]>([])
+
+const PostList = () => {
+  const [posts, setPosts] = useState<Post[]>([])
   useEffect(() => {
     getData()
   }, [])
 
   const getData = async () => {
-    setUsers(await fetchData('users'))
+    setPosts(await fetchData('posts'))
   }
 
+
   let rows :JSX.Element[] = []
-  if (users){
-    rows = composeRows(users)
+  if (posts){
+    rows = composeRows(posts)
   }
   return (
     <div className='main'>
       <table className="table">
           <thead className="thead">
             <tr className="tr">
-              <td className="td">Name</td>
-              <td className="td">Username</td>
+              <td className="td">Title</td>
+              <td className="td">Content</td>
             </tr>
           </thead>
           <tbody>
@@ -33,21 +34,19 @@ const UserList = () => {
       </table>
     </div>
   )
-
 }
 
-
-const composeRows = (users : User[]) => {
+const composeRows = (posts : Post[]) => {
     let rows :JSX.Element[] = []
-    users.forEach((user) => {
+    posts.forEach((post) => {
       rows.push(
-        <tr key={user.id}className="tr">
-          <td className="td">{user.name}</td>
-          <td className="td">{user.username}</td>
+        <tr key={post.id}className="tr">
+          <td className="td">{post.title}</td>
+          <td className="td">{post.body}</td>
         </tr>
       )
     });
     return rows
 }
 
-export { UserList }
+export { PostList }

@@ -1,6 +1,4 @@
-import '../Main.scss'
-import DOMpurify from 'dompurify'
-
+import './TodoList.scss'
 import {useState, useEffect} from 'react'
 import { fetchData } from '../../../scripts/fetchData'
 import {Todo} from '../../../models/todo'
@@ -16,40 +14,41 @@ const TodoList = () => {
     setTodos(await fetchData('todos'))
   }
 
-  let cleanPostsHTML = `<div class='main'></div>`
-
+  let rows :JSX.Element[] = []
   if (todos){
-    cleanPostsHTML = DOMpurify.sanitize(createTodosHTMLString(todos))
+    rows = composeRows(todos)
   }
+  return (
+    <div className='main'>
+      <table className="table">
+          <thead className="thead">
+            <tr className="tr">
+              <td className="td">Title</td>
+              <td className="td completed">Completed</td>
+            </tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+      </table>
+    </div>
+  )
 
-  return (<div dangerouslySetInnerHTML={{__html: cleanPostsHTML}} />)
-}
-
-const createTodosHTMLString = (todos : Todo[]) => {
-  let todosHTML : string
-  todosHTML = `<div class='main'>
-    <table class="table">
-    <thead class="thead">
-    <tr class="tr">
-    <td class="td">Task</td>
-    <td class="td completed">Completed</td>
-    </tr>
-    </thead>
-    <tbody>
-  `
-  todos.forEach(todo => {
-      todosHTML += `
-      <tr class="tr">
-      <td class="td">${todo.title}</td>
-      <td class="td">${todo.completed}</td>
-      </tr>
-    `
-  });
-
-  todosHTML += `</tbody></table></div>`
-  return todosHTML
 
 }
 
+const composeRows = (todos : Todo[]) => {
+    let rows :JSX.Element[] = []
+    todos.forEach((todo) => {
+      console.log(todo.completed)
+      rows.push(
+        <tr key={todo.id}className="tr">
+          <td className="td">{todo.title}</td>
+          <td className="td">{todo.completed.toString()}</td>
+        </tr>
+      )
+    });
+    return rows
+}
 
-export { TodoList } 
+export { TodoList }
