@@ -14,39 +14,30 @@ const UserList = () => {
     setUsers(await fetchData('users'))
   }
 
-  let rows :JSX.Element[] = []
-  if (users && users.length > 0){
-    rows = composeRows(users)
-    return (
-      <table className="table">
-          <thead className="thead">
-            <tr className="tr">
-              <td className="td">Name</td>
-              <td className="td">Username</td>
-            </tr>
-          </thead>
-          <tbody>
-            {rows}
-          </tbody>
-      </table>
-  )
-  }
+  if (users.length === 0){
   return <>Loading...</>
+  }
 
-}
+  let rows :JSX.Element[] = users.map((user) =>(
+    <tr key={user.id}className="tr">
+      <td className="td">{user.name}</td>
+      <td className="td">{user.username}</td>
+    </tr>
+  ))
 
-
-const composeRows = (users : User[]) => {
-    let rows :JSX.Element[] = []
-    users.forEach((user) => {
-      rows.push(
-        <tr key={user.id}className="tr">
-          <td className="td">{user.name}</td>
-          <td className="td">{user.username}</td>
+  return (
+    <table className="table">
+      <thead className="thead">
+        <tr className="tr">
+          <td className="td">Name</td>
+          <td className="td">Username</td>
         </tr>
-      )
-    });
-    return rows
+      </thead>
+      <tbody>
+        {rows}
+      </tbody>
+    </table>
+  )
 }
 
 export { UserList }

@@ -14,38 +14,30 @@ const TodoList = () => {
     setTodos(await fetchData('todos'))
   }
 
-  let rows :JSX.Element[] = []
-  if (todos && todos.length > 0){
-    rows = composeRows(todos)
-      return (
-      <table className="table">
-          <thead className="thead">
-            <tr className="tr">
-              <td className="td">Title</td>
-              <td className="td completed">Completed</td>
-            </tr>
-          </thead>
-          <tbody>
-            {rows}
-          </tbody>
-      </table>
-  )
+  if (todos.length === 0){
+    return <>Loading...</>
   }
-  return <>Loading...</>
 
-}
+  let rows :JSX.Element[] = todos.map((todo) =>(
+    <tr key={todo.id}className="tr">
+      <td className="td">{todo.title}</td>
+      <td className="td">{todo.completed}</td>
+    </tr>
+  ))
 
-const composeRows = (todos : Todo[]) => {
-    let rows :JSX.Element[] = []
-    todos.forEach((todo) => {
-      rows.push(
-        <tr key={todo.id}className="tr">
-          <td className="td">{todo.title}</td>
-          <td className="td">{todo.completed.toString()}</td>
+  return (
+    <table className="table">
+      <thead className="thead">
+        <tr className="tr">
+          <td className="td">Title</td>
+          <td className="td completed">Completed</td>
         </tr>
-      )
-    });
-    return rows
+      </thead>
+      <tbody>
+        {rows}
+      </tbody>
+    </table>
+  )
 }
 
 export { TodoList }

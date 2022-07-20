@@ -14,39 +14,29 @@ const PostList = () => {
     setPosts(await fetchData('posts'))
   }
 
-
-  let rows :JSX.Element[] = []
-  if (posts && posts.length > 0){
-    rows = composeRows(posts)
-      return (
-      <table className="table">
-          <thead className="thead">
-            <tr className="tr">
-              <td className="td">Title</td>
-              <td className="td">Content</td>
-            </tr>
-          </thead>
-          <tbody>
-            {rows}
-          </tbody>
-      </table>
-  )
-  }
+  if (posts.length === 0){
   return <>Loading...</>
+  }
+  let rows :JSX.Element[] = posts.map((post) =>(
+    <tr key={post.id}className="tr">
+      <td className="td">{post.title}</td>
+      <td className="td">{post.body}</td>
+    </tr>
+  ))
 
-}
-
-const composeRows = (posts : Post[]) => {
-    let rows :JSX.Element[] = []
-    posts.forEach((post) => {
-      rows.push(
-        <tr key={post.id}className="tr">
-          <td className="td">{post.title}</td>
-          <td className="td">{post.body}</td>
+  return (
+    <table className="table">
+      <thead className="thead">
+        <tr className="tr">
+          <td className="td">Title</td>
+          <td className="td">Content</td>
         </tr>
-      )
-    });
-    return rows
+      </thead>
+      <tbody>
+        {rows}
+      </tbody>
+    </table>
+  )
 }
 
 export { PostList }
