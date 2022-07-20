@@ -2,9 +2,28 @@ import './Main.scss'
 import DOMpurify from 'dompurify'
 
 import {IPosts} from '../../interfaces/JSONPlaceholderTypes'
+import { fetchData } from '../../scripts/fetchData'
+import {useState, useEffect} from 'react'
+
 
 
 const PostsList: React.FC<IPosts> = (posts : IPosts) => {
+
+
+  const [dummy, setDummy] = useState<IPosts>()
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const getData = async () => {
+    setDummy(await fetchData('posts'))
+  }
+  if (dummy){
+    console.log(typeof dummy === typeof posts)
+    console.log(dummy == posts)
+  }
+
   let cleanPostsHTML = `<div class='main'></div>`
 
   cleanPostsHTML = DOMpurify.sanitize(createPostsHTMLString(posts))
