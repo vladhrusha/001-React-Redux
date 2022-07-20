@@ -1,6 +1,8 @@
 import './Navigation.scss'
-import Home from '../pages/Home'
-import { PostsList, TodoList, UserList } from '../pages'
+import {Home} from '../pages/Home'
+import {PostsList} from '../pages/PostsList'
+import {TodoList} from '../pages/TodoList'
+import {UserList} from '../pages/UserList'
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 

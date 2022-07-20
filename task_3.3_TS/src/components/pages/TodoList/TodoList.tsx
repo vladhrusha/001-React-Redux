@@ -1,9 +1,9 @@
-import './Main.scss'
+import '../Main.scss'
 import DOMpurify from 'dompurify'
 
 import {useState, useEffect} from 'react'
-import { fetchData } from '../../scripts/fetchData'
-import {Todo} from './todo'
+import { fetchData } from '../../../scripts/fetchData'
+import {Todo} from '../../../models/todo'
 
 
 const TodoList = () => {

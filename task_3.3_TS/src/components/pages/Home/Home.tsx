@@ -1,5 +1,5 @@
-import './Main.scss'
-import logo from '../../logo.svg'
+import '../Main.scss'
+import logo from '../../../logo.svg'
 
 
 const Home = () => {
@@ -9,5 +9,5 @@ const Home = () => {
     </div>
   )
 }
-export default Home
+export {Home}
 

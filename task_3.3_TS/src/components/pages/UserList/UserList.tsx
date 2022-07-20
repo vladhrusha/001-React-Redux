@@ -1,9 +1,9 @@
-import './Main.scss'
+import '../Main.scss'
 import DOMpurify from 'dompurify'
 
 import {useState, useEffect} from 'react'
-import { fetchData } from '../../scripts/fetchData'
-import {User} from './user'
+import { fetchData } from '../../../scripts/fetchData'
+import {User} from '../../../models/user'
 
 const UserList = () => {
   const [users, setUsers] = useState<User[]>([])

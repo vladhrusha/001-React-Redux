@@ -1,8 +1,8 @@
-import './Main.scss'
+import '../Main.scss'
 import DOMpurify from 'dompurify'
 import {useState, useEffect} from 'react'
-import { fetchData } from '../../scripts/fetchData'
-import {Post} from './post'
+import { fetchData } from '../../../scripts/fetchData'
+import {Post} from '../../../models/post'
 
 
 const PostsList = () => {
