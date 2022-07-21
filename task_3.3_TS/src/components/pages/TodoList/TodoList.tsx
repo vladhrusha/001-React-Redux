@@ -50,7 +50,7 @@ const TodoList = () => {
     }
 
   }
-  const onBlur = (e: React.FocusEvent) => {
+  const onTdBlur = (e: React.FocusEvent) => {
     const target = e.currentTarget
     const id = parseInt(e.currentTarget.parentElement!.id) - 1
     const targetText = target.innerHTML.toLowerCase()
@@ -81,7 +81,7 @@ const TodoList = () => {
               suppressContentEditableWarning={true}
               onKeyPress={event => {if (event.key === 'Enter') event.preventDefault()}}
               onKeyUp={event => onTdKeyUp(event)}
-              onBlur={event => onBlur(event)}
+              onBlur={event => onTdBlur(event)}
             >{todo.title}</td>
             <td
               className="td completed"
@@ -89,7 +89,7 @@ const TodoList = () => {
               suppressContentEditableWarning={true}
               onKeyPress={event => {if (event.key === 'Enter') event.preventDefault()}}
               onKeyUp={event => onTdKeyUp(event)}
-              onBlur={event => onBlur(event)}
+              onBlur={event => onTdBlur(event)}
             >{todo.completed.toString()}</td>
           </tr>
         ))}
