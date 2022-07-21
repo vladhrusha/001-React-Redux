@@ -1,7 +1,8 @@
 import './TodoList.scss'
-import {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { fetchData } from '../../../scripts/fetchData'
 import {Todo} from '../../../models/todo'
+import { isEmptyOrWhitespaceOnly } from '../../../scripts/utils'
 
 
 const TodoList = () => {
@@ -23,12 +24,16 @@ const TodoList = () => {
     if (e.key === 'Enter') {
       const id = parseInt(e.currentTarget.parentElement!.id) - 1
       const target = e.currentTarget
+      const targetText = target.innerHTML.toLowerCase()
       let todosVar = todos
-      if (target.classList.contains('title')){
+      if (target.classList.contains('title') && !isEmptyOrWhitespaceOnly(targetText)){
         todosVar[id].title = target.innerHTML
       }
+      if (target.classList.contains('title') && isEmptyOrWhitespaceOnly(targetText)){
+        target.innerHTML = todos[id].title.toString()
+        alert('Empty or Whitespaces Only text is not valid')
+      }
       if (target.classList.contains('completed')){
-        let targetText = target.innerHTML.toLowerCase()
         switch (targetText) {
           case 'false':
             todosVar[id].completed = false
@@ -41,12 +46,22 @@ const TodoList = () => {
             return false
         }
       }
-      document.addEventListener('click', (event) => {
-          console.log('focused out')
-      })
       setTodos(todosVar)
     }
 
+  }
+  const onBlur = (e: React.FocusEvent) => {
+    const target = e.currentTarget
+    const id = parseInt(e.currentTarget.parentElement!.id) - 1
+    const targetText = target.innerHTML.toLowerCase()
+    if (targetText !== 'true' && targetText !== 'false' && target.classList.contains('completed')){
+      target.innerHTML = todos[id].completed.toString()
+      alert('Only True or False accepted')
+    }
+    if (target.classList.contains('title') && isEmptyOrWhitespaceOnly(target.innerHTML)){
+      target.innerHTML = todos[id].title.toString()
+      alert('Empty or Whitespaces Only text is not valid')
+    }
   }
   return (
     <table className="table">
@@ -66,6 +81,7 @@ const TodoList = () => {
               suppressContentEditableWarning={true}
               onKeyPress={event => {if (event.key === 'Enter') event.preventDefault()}}
               onKeyUp={event => onTdKeyUp(event)}
+              onBlur={event => onBlur(event)}
             >{todo.title}</td>
             <td
               className="td completed"
@@ -73,6 +89,7 @@ const TodoList = () => {
               suppressContentEditableWarning={true}
               onKeyPress={event => {if (event.key === 'Enter') event.preventDefault()}}
               onKeyUp={event => onTdKeyUp(event)}
+              onBlur={event => onBlur(event)}
             >{todo.completed.toString()}</td>
           </tr>
         ))}
@@ -80,9 +97,7 @@ const TodoList = () => {
     </table>
   )
 
-
 }
-
-
-
 export { TodoList }
+
+
