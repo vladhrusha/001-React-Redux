@@ -14,8 +14,6 @@ const TodoList = () => {
     getData()
   }, [])
 
-
-
   if (todos.length === 0){
     return <>Loading...</>
   }
