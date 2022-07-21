@@ -1,5 +1,5 @@
-import './Main.scss';
-import logo from '../../logo.svg';
+import './Home.scss'
+import logo from '../../../logo.svg'
 
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
     <div className='main'>
       <img src={logo} className='logo--central' alt='logo' />
     </div>
-  );
-};
-export default Home;
+  )
+}
+export {Home}
 
