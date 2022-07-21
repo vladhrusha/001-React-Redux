@@ -60,6 +60,15 @@ const TodoList = () => {
   }
   const onClickDelete = (e: React.MouseEvent) => {
     e.currentTarget.parentElement!.remove()
+    const id = parseInt(e.currentTarget.parentElement!.id) - 1
+    let todosVar = todos
+    todosVar.splice(id, 1)
+    todosVar.forEach((todoVar, index) => {
+      todoVar.id = index + 1
+    })
+    setTodos(todosVar)
+    console.log(todosVar)
+
   }
   return (
     <table className="table">
