@@ -41,7 +41,7 @@ const TodoList = () => {
             break
           default:
             alert('Only True or False accepted')
-            return false
+            return
         }
       }
       setTodos(todosVar)
@@ -51,14 +51,11 @@ const TodoList = () => {
   const onTdBlur = (e: React.FocusEvent) => {
     const target = e.currentTarget
     const id = parseInt(e.currentTarget.parentElement!.id) - 1
-    const targetText = target.innerHTML.toLowerCase()
-    if (targetText !== 'true' && targetText !== 'false' && target.classList.contains('completed')){
+    if (target.classList.contains('completed')){
       target.innerHTML = todos[id].completed.toString()
-      alert('Only True or False accepted')
     }
-    if (target.classList.contains('title') && isEmptyOrWhitespaceOnly(target.innerHTML)){
+    if (target.classList.contains('title')){
       target.innerHTML = todos[id].title.toString()
-      alert('Empty or Whitespaces Only text is not valid')
     }
   }
   return (
