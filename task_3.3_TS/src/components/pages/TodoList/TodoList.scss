@@ -4,6 +4,10 @@
 
 .thead {
     color: #61dafb;
+    .td.completed {
+        position: relative;
+        right: 10px;
+    }
 }
 
 .tr {
@@ -14,7 +18,3 @@
     padding: 10px 10px;
 }
 
-.td.completed {
-    position: relative;
-    right: 10px;
-}

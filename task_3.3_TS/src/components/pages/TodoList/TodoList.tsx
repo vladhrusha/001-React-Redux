@@ -19,7 +19,35 @@ const TodoList = () => {
     return <>Loading...</>
   }
 
+  const onTdKeyUp = (e : React.KeyboardEvent ) => {
+    if (e.key === 'Enter') {
+      const id = parseInt(e.currentTarget.parentElement!.id) - 1
+      const target = e.currentTarget
+      let todosVar = todos
+      if (target.classList.contains('title')){
+        todosVar[id].title = target.innerHTML
+      }
+      if (target.classList.contains('completed')){
+        let targetText = target.innerHTML.toLowerCase()
+        switch (targetText) {
+          case 'false':
+            todosVar[id].completed = false
+            break
+          case 'true':
+            todosVar[id].completed = true
+            break
+          default:
+            alert('Only True or False accepted')
+            return false
+        }
+      }
+      document.addEventListener('click', (event) => {
+          console.log('focused out')
+      })
+      setTodos(todosVar)
+    }
 
+  }
   return (
     <table className="table">
       <thead className="thead">
@@ -31,14 +59,30 @@ const TodoList = () => {
       <tbody>
         {
         todos.map((todo) =>(
-          <tr key={todo.id}className="tr">
-            <td className="td">{todo.title}</td>
-            <td className="td">{todo.completed}</td>
+          <tr key={todo.id} id={todo.id.toString()}className="tr" >
+            <td
+              className="td title"
+              contentEditable="true"
+              suppressContentEditableWarning={true}
+              onKeyPress={event => {if (event.key === 'Enter') event.preventDefault()}}
+              onKeyUp={event => onTdKeyUp(event)}
+            >{todo.title}</td>
+            <td
+              className="td completed"
+              contentEditable="true"
+              suppressContentEditableWarning={true}
+              onKeyPress={event => {if (event.key === 'Enter') event.preventDefault()}}
+              onKeyUp={event => onTdKeyUp(event)}
+            >{todo.completed.toString()}</td>
           </tr>
         ))}
       </tbody>
     </table>
   )
+
+
 }
+
+
 
 export { TodoList }
