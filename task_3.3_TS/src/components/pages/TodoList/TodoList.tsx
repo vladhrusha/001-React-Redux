@@ -58,6 +58,9 @@ const TodoList = () => {
       target.innerHTML = todos[id].title.toString()
     }
   }
+  const onClickDelete = (e: React.MouseEvent) => {
+    e.currentTarget.parentElement!.remove()
+  }
   return (
     <table className="table">
       <thead className="thead">
@@ -86,6 +89,9 @@ const TodoList = () => {
               onKeyUp={event => onTdKeyUp(event)}
               onBlur={event => onTdBlur(event)}
             >{todo.completed.toString()}</td>
+            <td className="td deleted" onClick={event => onClickDelete(event)}>
+              Delete
+            </td>
           </tr>
         ))}
       </tbody>
