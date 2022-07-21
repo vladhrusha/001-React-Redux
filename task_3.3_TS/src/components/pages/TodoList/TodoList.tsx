@@ -59,6 +59,10 @@ const TodoList = () => {
     }
   }
   const onClickDelete = (e: React.MouseEvent) => {
+    const rows = e.currentTarget.parentElement!.parentElement?.querySelectorAll('.tr')
+    rows!.forEach(row => {
+      row.id = (parseInt(row.id) - 1).toString()
+    });
     e.currentTarget.parentElement!.remove()
     const id = parseInt(e.currentTarget.parentElement!.id) - 1
     let todosVar = todos
