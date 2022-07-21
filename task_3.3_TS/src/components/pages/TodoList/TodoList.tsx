@@ -67,8 +67,6 @@ const TodoList = () => {
       todoVar.id = index + 1
     })
     setTodos(todosVar)
-    console.log(todosVar)
-
   }
   return (
     <table className="table">
