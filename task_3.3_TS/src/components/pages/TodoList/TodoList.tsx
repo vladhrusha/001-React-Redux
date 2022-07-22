@@ -19,7 +19,9 @@ const TodoList = () => {
   }
 
   const onTdKeyUp = (e : React.KeyboardEvent ) => {
-    if (e.key === 'Enter') {
+    if (e.key !== 'Enter'){
+      return;
+    }
       const id = parseInt(e.currentTarget.parentElement!.id) - 1
       const target = e.currentTarget
       const targetText = target.innerHTML.toLowerCase()
@@ -45,7 +47,6 @@ const TodoList = () => {
         }
       }
       setTodos(todosVar)
-    }
 
   }
   const onTdBlur = (e: React.FocusEvent) => {
