@@ -22,31 +22,31 @@ const TodoList = () => {
     if (e.key !== 'Enter'){
       return;
     }
-      const id = parseInt(e.currentTarget.parentElement!.id) - 1
-      const target = e.currentTarget
-      const targetText = target.innerHTML.toLowerCase()
-      let todosVar = todos
-      if (target.classList.contains('title') && !isEmptyOrWhitespaceOnly(targetText)){
-        todosVar[id].title = target.innerHTML
+    const id = parseInt(e.currentTarget.parentElement!.id) - 1
+    const target = e.currentTarget
+    const targetText = target.innerHTML.toLowerCase()
+    let todosVar = todos
+    if (target.classList.contains('title') && !isEmptyOrWhitespaceOnly(targetText)){
+      todosVar[id].title = target.innerHTML
+    }
+    if (target.classList.contains('title') && isEmptyOrWhitespaceOnly(targetText)){
+      target.innerHTML = todos[id].title.toString()
+      alert('Empty or Whitespaces Only text is not valid')
+    }
+    if (target.classList.contains('completed')){
+      switch (targetText) {
+        case 'false':
+          todosVar[id].completed = false
+          break
+        case 'true':
+          todosVar[id].completed = true
+          break
+        default:
+          alert('Only True or False accepted')
+          return
       }
-      if (target.classList.contains('title') && isEmptyOrWhitespaceOnly(targetText)){
-        target.innerHTML = todos[id].title.toString()
-        alert('Empty or Whitespaces Only text is not valid')
-      }
-      if (target.classList.contains('completed')){
-        switch (targetText) {
-          case 'false':
-            todosVar[id].completed = false
-            break
-          case 'true':
-            todosVar[id].completed = true
-            break
-          default:
-            alert('Only True or False accepted')
-            return
-        }
-      }
-      setTodos(todosVar)
+    }
+    setTodos(todosVar)
 
   }
   const onTdBlur = (e: React.FocusEvent) => {
