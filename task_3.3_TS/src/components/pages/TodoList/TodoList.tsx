@@ -14,9 +14,6 @@ const TodoList = () => {
     getData()
   }, [])
 
-  if (todos.length === 0){
-    return <>Loading...</>
-  }
 
   const onTdKeyUp = (e : React.KeyboardEvent ) => {
     if (e.key !== 'Enter'){
@@ -24,40 +21,15 @@ const TodoList = () => {
     }
     const id = parseInt(e.currentTarget.parentElement!.id) - 1
     const target = e.currentTarget
-    const targetText = target.innerHTML.toLowerCase()
-    let todosVar = todos
+    const targetText = target.innerHTML
     if (target.classList.contains('title') && !isEmptyOrWhitespaceOnly(targetText)){
-      todosVar[id].title = target.innerHTML
+      todos[id].title = targetText
     }
     if (target.classList.contains('title') && isEmptyOrWhitespaceOnly(targetText)){
-      target.innerHTML = todos[id].title.toString()
       alert('Empty or Whitespaces Only text is not valid')
     }
-    if (target.classList.contains('completed')){
-      switch (targetText) {
-        case 'false':
-          todosVar[id].completed = false
-          break
-        case 'true':
-          todosVar[id].completed = true
-          break
-        default:
-          alert('Only True or False accepted')
-          return
-      }
-    }
-    setTodos(todosVar)
-
   }
-  const onTdBlur = (e: React.FocusEvent) => {
-    const target = e.currentTarget
-    const id = parseInt(e.currentTarget.parentElement!.id) - 1
-    if (target.classList.contains('completed')){
-      target.innerHTML = todos[id].completed.toString()
-    }
-    if (target.classList.contains('title')){
-      target.innerHTML = todos[id].title.toString()
-    }
+  const onTitleTdBlur = (e: React.FocusEvent) => {
   }
   const onClickDelete = (e: React.MouseEvent) => {
     const rows = e.currentTarget.parentElement!.parentElement?.querySelectorAll('.tr')
@@ -72,6 +44,15 @@ const TodoList = () => {
       todoVar.id = index + 1
     })
     setTodos(todosVar)
+  }
+  const onCheckBoxClick = (e : React.MouseEvent) => {
+    const id = parseInt(e.currentTarget.parentElement!.parentElement!.id) - 1
+    const checkbox = e.currentTarget as HTMLInputElement
+    todos[id].completed = checkbox.checked
+  }
+
+  if (todos.length === 0){
+    return <>Loading...</>
   }
   return (
     <table className="table">
@@ -91,16 +72,19 @@ const TodoList = () => {
               suppressContentEditableWarning={true}
               onKeyPress={event => {if (event.key === 'Enter') event.preventDefault()}}
               onKeyUp={event => onTdKeyUp(event)}
-              onBlur={event => onTdBlur(event)}
+              onBlur={event => onTitleTdBlur(event)}
             >{todo.title}</td>
             <td
               className="td completed"
-              contentEditable="true"
-              suppressContentEditableWarning={true}
-              onKeyPress={event => {if (event.key === 'Enter') event.preventDefault()}}
-              onKeyUp={event => onTdKeyUp(event)}
-              onBlur={event => onTdBlur(event)}
-            >{todo.completed.toString()}</td>
+            >
+              <input
+                type="checkbox"
+                onClick={onCheckBoxClick}
+                className="checkbox"
+                defaultChecked={todo.completed}
+                >
+              </input>
+            </td>
             <td className="td deleted" onClick={event => onClickDelete(event)}>
               Delete
             </td>
