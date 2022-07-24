@@ -11,7 +11,6 @@ function App() {
 
       <Router>
         <Navigation />
-
         <div className="main">
           <Routes>
             <Route path='/PostList' element={<PostList />}></Route>

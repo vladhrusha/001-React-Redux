@@ -18,3 +18,17 @@
     padding: 10px 10px;
 }
 
+.todo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.todo__input {
+    background-color: #6d788d;
+    border-radius: 5px;
+}
+.todo__input:focus {
+    color: black;
+    outline: none !important;
+    border: black solid 3px;
+}
