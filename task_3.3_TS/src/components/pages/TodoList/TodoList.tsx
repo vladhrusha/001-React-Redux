@@ -18,25 +18,8 @@ const TodoList = () => {
   }, [])
 
 
-  const onClickDelete = (e: React.MouseEvent) => {
-    const id = parseInt(e.currentTarget.parentElement!.id) - 1
-    //delete from DOM
-    e.currentTarget.parentElement!.remove()
-    const table = document.querySelector('.table')
-    const rows = table!.querySelectorAll('.tr')
-    rows!.forEach((row, i) => {
-      row.id = i.toString()
-    });
-
-    //delete from Data
-    let todosVar = todos
-    todosVar.splice(id, 1)
-    todosVar.forEach((todoVar, indexx) => {
-      todoVar.id = indexx + 1
-    })
-    setTodos(todosVar)
-    console.log(rows.length - 1)
-
+  const onClickDelete = (e: React.MouseEvent, id : number) => {
+    setTodos([...todos.filter((todo) => id !==  todo.id)])
   }
   const onCheckBoxClick = (e : React.MouseEvent) => {
     const id = parseInt(e.currentTarget.parentElement!.parentElement!.id) - 1
@@ -44,25 +27,15 @@ const TodoList = () => {
     todos[id].completed = checkbox.checked
   }
 
-  //if N>1 items were deleted from data since last onTableClick,
-  //deletes N items from DOM again
-  // both setInput value and setIndex trigger that
-  const onTitleClick = (e : React.MouseEvent) => {
+  const onTitleClick = (e : React.MouseEvent, id : number) => {
     const input = document.querySelector('.todo__input') as HTMLInputElement
-    const id = parseInt(e.currentTarget.parentElement!.id) - 1
-    setInputValue(todos[id].title)
-    console.log(todos[id].title)
-
-    console.log(id)
-    setIndex(id)
-    const table = document.querySelector('.table')
-    const rows = table!.querySelectorAll('.tr')
-    console.log(rows.length  - 1)
+    const selectedTodo = [...todos.filter((todo) => id === todo.id)][0]
+    setInputValue(selectedTodo.title)
+    setIndex(selectedTodo.id)
     input.focus()
   }
   const onInputBlur = (e :React.FocusEvent) => {
     setInputValue('')
-    setIndex(0)
   }
   const onKeyUp = ( e : React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== 'Enter'){
@@ -76,11 +49,13 @@ const TodoList = () => {
   }
 
   const handleSubmit = () => {
-    let todosVar = todos
-    todosVar[index].title = inputValue
-    setTodos(todosVar)
+    todos.forEach(todo => {
+      if (todo.id === index){
+        todo.title = inputValue
+      }
+    });
+    setTodos([...todos])
     setInputValue("")
-    setIndex(0)
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,7 +90,7 @@ const TodoList = () => {
           <tr key={todo.id} id={todo.id.toString()}className="tr" >
             <td
               className="td title"
-              onClick={event => onTitleClick(event)}
+              onClick={event => onTitleClick(event, todo.id)}
             >{todo.title}
             </td>
             <td
@@ -129,7 +104,7 @@ const TodoList = () => {
                 >
               </input>
             </td>
-            <td className="td deleted" onClick={event => onClickDelete(event)}>
+            <td className="td deleted" onClick={event => onClickDelete(event, todo.id)}>
               Delete
             </td>
           </tr>
