@@ -21,18 +21,17 @@ const TodoList = () => {
   const onClickDelete = (e: React.MouseEvent, id : number) => {
     setTodos([...todos.filter((todo) => id !==  todo.id)])
   }
-  const onCheckBoxClick = (e : React.MouseEvent) => {
-    const id = parseInt(e.currentTarget.parentElement!.parentElement!.id) - 1
-    const checkbox = e.currentTarget as HTMLInputElement
-    todos[id].completed = checkbox.checked
+  const onCheckBoxClick = (e : React.MouseEvent, id : number) => {
+    todos[id - 1].completed = !todos[id - 1].completed
+    setTodos([...todos])
   }
 
   const onTitleClick = (e : React.MouseEvent, id : number) => {
-    const input = document.querySelector('.todo__input') as HTMLInputElement
-    const selectedTodo = [...todos.filter((todo) => id === todo.id)][0]
-    setInputValue(selectedTodo.title)
-    setIndex(selectedTodo.id)
-    input.focus()
+
+
+    const selectedTodo = todos.find(todo => todo.id === id)
+    setInputValue(selectedTodo!.title)
+    setIndex(selectedTodo!.id)
   }
   const onInputBlur = (e :React.FocusEvent) => {
     setInputValue('')
@@ -73,7 +72,6 @@ const TodoList = () => {
       onChange={onChange}
       onKeyUp={onKeyUp}
       onBlur={onInputBlur}
-      onClick={e => e.currentTarget.blur()}
 
     >
     </input>
@@ -98,7 +96,7 @@ const TodoList = () => {
             >
               <input
                 type="checkbox"
-                onClick={onCheckBoxClick}
+                onClick={event => onCheckBoxClick(event, todo.id)}
                 className="checkbox"
                 defaultChecked={todo.completed}
                 >
