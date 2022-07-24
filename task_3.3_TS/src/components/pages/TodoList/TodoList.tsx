@@ -29,16 +29,12 @@ const TodoList = () => {
     });
 
     //delete from Data
-
-    // setTodos([...todos.filter((todo) => todo.id !==id)])
-
     let todosVar = todos
     todosVar.splice(id, 1)
     todosVar.forEach((todoVar, indexx) => {
       todoVar.id = indexx + 1
     })
     setTodos(todosVar)
-    console.log(todos)
     console.log(rows.length - 1)
 
   }
@@ -49,17 +45,16 @@ const TodoList = () => {
   }
 
   //if N>1 items were deleted from data since last onTableClick,
-  //deletes N items from DOM repeatedly
-  // both setInput value and setIndex do that
+  //deletes N items from DOM again
+  // both setInput value and setIndex trigger that
   const onTitleClick = (e : React.MouseEvent) => {
     const input = document.querySelector('.todo__input') as HTMLInputElement
     const id = parseInt(e.currentTarget.parentElement!.id) - 1
-    // setInputValue(todos[id].title)
-    setInputValue('kek')
+    setInputValue(todos[id].title)
     console.log(todos[id].title)
 
     console.log(id)
-    // setIndex(id)
+    setIndex(id)
     const table = document.querySelector('.table')
     const rows = table!.querySelectorAll('.tr')
     console.log(rows.length  - 1)
@@ -103,6 +98,7 @@ const TodoList = () => {
       onChange={onChange}
       onKeyUp={onKeyUp}
       onBlur={onInputBlur}
+      onClick={e => e.currentTarget.blur()}
 
     >
     </input>
