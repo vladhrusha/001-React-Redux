@@ -1,0 +1,31 @@
+.addPost {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.titleInput {
+    width: 20%;
+    height: 50px;
+}
+.contentInput {
+    width: 60%;
+    height: 50px;
+}
+.submitButton {
+    height: 30px;
+    width: 10%;
+    font-size: 16px;
+}
+
+.titleInput, .contentInput, .submitButton {
+    background-color: #6d788d;
+    border-radius: 5px;
+    color: black;
+    font-size: 14px;
+}
+
+.titleInput:focus, .contentInput:focus {
+    outline: none !important;
+    border: black solid 3px;
+}
