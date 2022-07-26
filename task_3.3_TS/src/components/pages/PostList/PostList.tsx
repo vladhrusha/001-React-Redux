@@ -16,13 +16,13 @@ const PostList = () => {
   }, [])
 
   const addPost = (formValues : FormValues):void => {
-    posts.push({
-      userId : posts[posts.length - 1].userId + 1,
-      id : posts[posts.length - 1].id + 1,
+    const dummyPosts = [...posts, {
       title: formValues.title,
-      body: formValues.body
-    })
-    setPosts([...posts])
+      body : formValues.body,
+      id: posts[posts.length - 1].id++,
+      userId: posts[posts.length - 1].userId++,
+    }]
+    setPosts(dummyPosts)
     createOrUpdatePosts('posts', posts)
   }
 

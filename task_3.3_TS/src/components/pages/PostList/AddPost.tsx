@@ -3,8 +3,11 @@ import {useFormik} from 'formik'
 import {FormValues} from '../../../models/post'
 
 
+type Props = {
+    addPost: (arg : FormValues) => void,
+}
 
-function AddPost({addPost} : FuncProps) {
+export const AddPost: React.FC<Props> = ({addPost} : Props) => {
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -15,8 +18,7 @@ function AddPost({addPost} : FuncProps) {
 
     const onSubmit = async (formValues : FormValues) => {
         addPost(formValues)
-        formik.values.body = ''
-        formik.values.title = ''
+        formik.resetForm()
     }
 
     return (
@@ -40,9 +42,3 @@ function AddPost({addPost} : FuncProps) {
         <button type="submit" className='submitButton' onSubmit={e => e.preventDefault()}>Add</button>
     </form>)
 }
-
-interface FuncProps {
-    addPost(arg : FormValues) : void
-}
-
-export {AddPost}

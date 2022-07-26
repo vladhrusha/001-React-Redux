@@ -14,11 +14,10 @@ const createOrUpdatePosts = async (resourceName : string, posts : Post[]) => {
             body: JSON.stringify(posts),
             headers: {
             'Content-type': 'application/json; charset=UTF-8',
-        }
+            }
         },
-        )
+    )
     await response.json()
-    return
 }
 
 export {fetchData, createOrUpdatePosts}
