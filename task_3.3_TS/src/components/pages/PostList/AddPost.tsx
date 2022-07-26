@@ -7,7 +7,7 @@ type Props = {
     addPost: (arg : FormValues) => void,
 }
 
-export const AddPost: React.FC<Props> = ({addPost} : Props) => {
+export const AddPost: React.VFC<Props> = ({addPost} : Props) => {
     const formik = useFormik({
         initialValues: {
             title: '',
