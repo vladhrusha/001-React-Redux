@@ -1,7 +1,9 @@
 import './PostList.scss'
 import {useState, useEffect} from 'react'
-import { fetchData } from '../../../scripts/fetchData'
-import {Post} from '../../../models/post'
+import { fetchData, createOrUpdatePosts } from '../../../scripts/fetchData'
+import {Post, FormValues} from '../../../models/post'
+import {AddPost} from './AddPost'
+
 
 
 const PostList = () => {
@@ -13,13 +15,24 @@ const PostList = () => {
     getData()
   }, [])
 
-
+  const addPost = (formValues : FormValues):void => {
+    const dummyPosts = [...posts, {
+      title: formValues.title,
+      body : formValues.body,
+      id: posts[posts.length - 1].id++,
+      userId: posts[posts.length - 1].userId++,
+    }]
+    setPosts(dummyPosts)
+    createOrUpdatePosts('posts', posts)
+  }
 
   if (posts.length === 0){
   return <>Loading...</>
   }
 
   return (
+    <div className="postList">
+    <AddPost addPost={addPost}/>
     <table className="table">
       <thead className="thead">
         <tr className="tr">
@@ -30,14 +43,17 @@ const PostList = () => {
       <tbody>
         {
         posts.map((post) =>(
-          <tr key={post.id}className="tr">
+          <tr key={post.id} id={post.id.toString()} className="tr">
             <td className="td">{post.title}</td>
             <td className="td">{post.body}</td>
           </tr>
         ))}
       </tbody>
     </table>
+    </div>
   )
 }
+
+
 
 export { PostList }
