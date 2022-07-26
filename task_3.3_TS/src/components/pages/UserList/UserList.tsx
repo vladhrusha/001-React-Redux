@@ -5,7 +5,6 @@ import { fetchData } from '../../../scripts/fetchData'
 import {User} from '../../../models/user'
 import { UserPage } from './UserPage'
 import {
-  useMatch,
   Link,
   Routes,
   Route,
@@ -20,12 +19,9 @@ const UserList = () => {
     getData()
   }, [])
 
-  let match = useMatch('/UserList/')
-
   if (users.length === 0){
   return <>Loading...</>
   }
-  console.log(match?.pathname)
   return (
     <div className='userList'>
       <h1 className='h1'>Users</h1>
