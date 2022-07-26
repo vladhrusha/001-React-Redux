@@ -1,22 +1,24 @@
-.table {
+.todoList__table {
     border-collapse: collapse;
-}
+    .thead {
+            color: #61dafb;
 
-.thead {
-    color: #61dafb;
-    .td.completed {
-        position: relative;
-        right: 10px;
+        .td.completed {
+            position: relative;
+            right: 10px;
+        }
+    }
+
+    .tr {
+        border-bottom: solid white 2px;
+    }
+
+    .td {
+        padding: 10px 10px;
     }
 }
 
-.tr {
-    border-bottom: solid white 2px;
-}
 
-.td {
-    padding: 10px 10px;
-}
 
 .todo {
     display: flex;

@@ -1,20 +1,30 @@
-.table {
+.userList {
+    .h1 {
+        text-align: center;
+    }
+}
+.userList__table {
     border-collapse: collapse;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.thead {
-    color: #61dafb;
-}
+    .thead .tr {
+        color: #61dafb;
+    }
 
-.tr {
-    border-bottom: solid white 2px;
-}
+    .tr {
+        border-bottom: solid white 2px;
+    }
 
-.td {
-    padding: 10px 10px;
-}
+    .td {
+        padding: 10px 10px;
+        width: 100px;
+    }
 
-.td.completed {
-    position: relative;
-    right: 10px;
+    .userLink {
+        color: white;
+        text-decoration: none;
+        display: flex;
+    }
 }
