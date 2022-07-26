@@ -42,7 +42,7 @@ const UserList = () => {
             users.map((user) =>(
               <tr key={user.id}className="tr">
                 <td className='td'>
-                  <Link to={`${match?.pathname}/${user.id}`} className="userLink">
+                  <Link to={`${user.id}`} className="userLink">
                     Click
                   </Link>
                 </td>
@@ -58,7 +58,7 @@ const UserList = () => {
         {
           users.map(user => {
             return (
-              <Route key={`${match?.pathname}${user.id}`} path={`${user.id}`} element={<UserPage {...user}></UserPage>}>
+              <Route key={`${user.id}`} path={`${user.id}`} element={<UserPage {...user}></UserPage>}>
               </Route>
             )
           })
