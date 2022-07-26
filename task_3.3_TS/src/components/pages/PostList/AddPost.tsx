@@ -39,6 +39,6 @@ export const AddPost: React.VFC<Props> = ({addPost} : Props) => {
             onChange={formik.handleChange}
         >
         </textarea>
-        <button type="submit" className='submitButton' onSubmit={e => e.preventDefault()}>Add</button>
+        <button type="submit" className='submitButton'>Add</button>
     </form>)
 }
