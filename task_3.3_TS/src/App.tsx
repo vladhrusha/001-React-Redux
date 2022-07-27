@@ -6,6 +6,7 @@ import {PostList} from './components/pages/PostList'
 import {TodoList} from './components/pages/TodoList'
 import {UserList} from './components/pages/UserList'
 function App() {
+
   return (
     <div className='app'>
 
@@ -15,7 +16,7 @@ function App() {
           <Routes>
             <Route path='/PostList' element={<PostList />}></Route>
             <Route path='/TodoList' element={<TodoList />}></Route>
-            <Route path='/UserList' element={<UserList />}></Route>
+            <Route path='/UserList/*' element={<UserList />}></Route>
             <Route path='/' element={<Home />}></Route>
           </Routes>
         </div>

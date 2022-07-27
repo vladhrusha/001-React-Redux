@@ -75,7 +75,7 @@ const TodoList = () => {
 
     >
     </input>
-    <table className="table">
+    <table className="todoList__table">
       <thead className="thead">
         <tr className="tr">
           <td className="td">Title</td>
