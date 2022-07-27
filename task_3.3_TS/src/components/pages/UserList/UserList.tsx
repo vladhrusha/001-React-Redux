@@ -3,7 +3,7 @@ import './UserList.scss'
 import {useState, useEffect} from 'react'
 import { fetchData } from '../../../scripts/fetchData'
 import {User} from '../../../models/user'
-import { UserPage } from './UserPage'
+import { UserPage } from '../UserPage'
 import {
   Link,
   Routes,
@@ -19,6 +19,10 @@ const UserList = () => {
     getData()
   }, [])
 
+
+  const getUserById = (id : number) => {
+    return users[id - 1]
+  }
   if (users.length === 0){
   return <>Loading...</>
   }
@@ -54,7 +58,7 @@ const UserList = () => {
         {
           users.map(user => {
             return (
-              <Route key={`${user.id}`} path={`${user.id}`} element={<UserPage {...user}></UserPage>}>
+              <Route key={`${user.id}`} path={`:id`} element={<UserPage getUserById={getUserById}></UserPage>}>
               </Route>
             )
           })
