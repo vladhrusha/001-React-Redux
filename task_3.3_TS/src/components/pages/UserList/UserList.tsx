@@ -56,7 +56,7 @@ const UserList = () => {
 
       <Routes>
         {
-          <Route key={`:id`} path={`:id`} element={<UserPage getUserById={getUserById}></UserPage>}>
+          <Route path={`:id`} element={<UserPage getUserById={getUserById}></UserPage>}>
           </Route>
         }
       </Routes>
