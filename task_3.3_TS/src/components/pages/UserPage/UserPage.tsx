@@ -13,6 +13,7 @@ import {
 import {MdOutlineWork} from 'react-icons/md'
 import Chance from 'chance'
 import { useParams } from 'react-router-dom'
+import { useMemo } from 'react'
 
 type Props = {
     getUserById: (arg : number) => User,
@@ -21,7 +22,8 @@ type Props = {
 export const UserPage = ({getUserById} : Props) => {
     const chance = new Chance()
     const {id} = useParams()
-    const user = getUserById(parseInt(id!))
+    const parsedId = parseInt(id!)
+    const user = useMemo(() => getUserById(parsedId), [parsedId])
     return (
             <table className='userPage__table'>
                 <tbody className='tbody'>
