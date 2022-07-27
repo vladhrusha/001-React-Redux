@@ -56,12 +56,8 @@ const UserList = () => {
 
       <Routes>
         {
-          users.map(user => {
-            return (
-              <Route key={`${user.id}`} path={`:id`} element={<UserPage getUserById={getUserById}></UserPage>}>
-              </Route>
-            )
-          })
+          <Route key={`:id`} path={`:id`} element={<UserPage getUserById={getUserById}></UserPage>}>
+          </Route>
         }
       </Routes>
     </div>
