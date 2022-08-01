@@ -32,7 +32,6 @@ export const UserPage = ({getUserById} : Props) => {
     const [albums, setAlbums] = useState<Album[]>([])
     const [todos, setTodos] = useState<Todo[]>([])
     const [posts, setPosts] = useState<Post[]>([])
-    const [stateVar, updateState] = useState(0)
 
     useEffect(() => {
         const getData = async () => {
