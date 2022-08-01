@@ -18,7 +18,6 @@ import {fetchData} from '../../../scripts/fetchData'
 import { Album } from '../../../models/albums'
 import { Post } from '../../../models/post'
 import { Todo } from '../../../models/todo'
-import { getEnvironmentData } from 'worker_threads'
 
 
 type Props = {
@@ -38,10 +37,8 @@ export const UserPage = ({getUserById} : Props) => {
     useEffect(() => {
         const getData = async () => {
             setAlbums(await fetchData(`users/${user.id}/albums`))
-            // setAlbums([...albums])
             setTodos(await fetchData(`users/${user.id}/todos`))
             setPosts(await fetchData(`users/${user.id}/posts`))
-            console.log('useffect')
         }
         getData()
     }, [user.id])
