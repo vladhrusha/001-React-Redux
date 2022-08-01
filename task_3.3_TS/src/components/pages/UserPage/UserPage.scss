@@ -1,3 +1,28 @@
+.userPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .tabs {
+        width: 35vw;
+        display: flex;
+        justify-content: space-around;
+        list-style-type: none;
+    }
+    .tabs--active {
+        color: #61dafb;
+    }
+
+    .tabs:first-child {
+        position: relative;
+        right: 25px;
+    }
+    .content {
+        display: none;
+    }
+    .content--active {
+        display: block;
+    }
+}
 .userPage__table {
     width: 50vw;
     display: flex;
