@@ -13,7 +13,13 @@ import {
 import {MdOutlineWork} from 'react-icons/md'
 import Chance from 'chance'
 import { useParams } from 'react-router-dom'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import {fetchData} from '../../../scripts/fetchData'
+import { Album } from '../../../models/albums'
+import { Post } from '../../../models/post'
+import { Todo } from '../../../models/todo'
+import { getEnvironmentData } from 'worker_threads'
+
 
 type Props = {
     getUserById: (arg : number) => User,
@@ -24,7 +30,110 @@ export const UserPage = ({getUserById} : Props) => {
     const {id} = useParams()
     const parsedId = parseInt(id!)
     const user = useMemo(() => getUserById(parsedId), [parsedId])
+    const [albums, setAlbums] = useState<Album[]>([])
+    const [todos, setTodos] = useState<Todo[]>([])
+    const [posts, setPosts] = useState<Post[]>([])
+    const [stateVar, updateState] = useState(0)
+
+    useEffect(() => {
+        const getData = async () => {
+            setAlbums(await fetchData(`users/${user.id}/albums`))
+            // setAlbums([...albums])
+            setTodos(await fetchData(`users/${user.id}/todos`))
+            setPosts(await fetchData(`users/${user.id}/posts`))
+            console.log('useffect')
+        }
+        getData()
+    }, [user.id])
+
+    const [toggleState, setToggleState] = useState(1)
+    const toggleTab = (index : number) => {
+        setToggleState(index)
+    }
+
     return (
+        <div className="userPage">
+            <ul className='tabs'>
+                <li
+                className ={toggleState === 1 ? "tabs tabs--active" : "tabs"}
+                onClick={() => toggleTab(1)}
+                >
+                    Albums
+                </li>
+                <li
+                    className ={toggleState === 2 ? "tabs tabs--active" : "tabs"}
+                    onClick={() => toggleTab(2)}
+                >
+                    Todos
+                </li>
+                <li
+                    onClick={() => toggleTab(3)}
+                    className ={toggleState === 3 ? "tabs tabs--active" : "tabs"}
+                >
+                    Posts
+                </li>
+            </ul>
+            <div className='tabs__content'>
+                <div className ={toggleState === 1 ? "content content--active" : "content"}>
+                    <table>
+                        <tbody>
+                        {
+                        albums.map((album) => {
+                            return (
+                                    <tr key={album.id} id={album.id.toString()}className="tr" >
+                                        <td
+                                        className="td title"
+                                        >{album.title}
+                                        </td>
+                                    </tr>
+                            )
+                        })
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div className ={toggleState === 2 ? "content content--active" : "content"}>
+                    <table>
+                        <tbody>
+                        {
+                        todos.map((todo) => {
+                            return (
+                                    <tr key={todo.id} id={todo.id.toString()}className="tr" >
+                                        <td>
+                                            <input type="checkbox" defaultChecked={todo.completed}></input>
+                                        </td>
+                                        <td
+                                        className="td title"
+                                        >{todo.title}
+                                        </td>
+                                    </tr>
+                            )
+                        })
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div className ={toggleState === 3 ? "content content--active" : "content"}>
+                    <table>
+                        <tbody>
+                        {
+                        posts.map((post) => {
+                            return (
+                                    <tr key={post.id} id={post.id.toString()}className="tr" >
+                                        <td>{post.id}</td>
+                                        <td
+                                        className="td title"
+                                        >{post.title}
+                                        </td>
+                                    </tr>
+                            )
+                        })
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <table className='userPage__table'>
                 <tbody className='tbody'>
                 <tr className='table__row'>
@@ -85,5 +194,6 @@ export const UserPage = ({getUserById} : Props) => {
                 </tr>
                 </tbody>
             </table>
+        </div>
         )
 }
